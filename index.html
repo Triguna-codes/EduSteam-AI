@@ -19,7 +19,9 @@
     </div>
 
     <div class="app-container hidden" id="main-app">
-        <aside class="sidebar">
+        <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+        <button id="hamburger-btn" class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+        <aside class="sidebar" id="sidebar">
             <div class="logo">
                 <h2>EduSteam <span>AI</span></h2>
             </div>
@@ -76,14 +78,14 @@
                 </section>
                 <section class="workspace-section hidden" id="flashcard-sec">
     <h2>🧠 Active Recall Study Hub</h2>
-
     <div class="iframe-container">
         <iframe
             id="quiz-iframe"
             src="https://quiz-genie-spark-59.lovable.app"
             width="100%"
             height="100%"
-            frameborder="0">
+            frameborder="0"
+            scrolling="yes">
         </iframe>
     </div>
 </section>
@@ -100,5 +102,21 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('open');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebar-overlay').classList.remove('open');
+        }
+        // Auto-close sidebar when a nav button is clicked on mobile
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.innerWidth <= 768) closeSidebar();
+            });
+        });
+    </script>
 </body>
 </html>
