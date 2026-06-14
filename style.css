@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. GLOBAL RESET & CORE COLOR VARIABLES
-   ========================================================================== */
 :root {
     --bg-primary: #0f172a;
     --bg-secondary: #1e293b;
@@ -29,21 +26,18 @@ body {
     width: 100vw;
 }
 
-/* Helper Utility to Manage Hidden Layout States */
 .hidden { 
     display: none !important; 
 }
 
-/* ==========================================================================
-   2. MAIN APPLICATION SHELL LAYOUT
-   ========================================================================== */
+
 .app-container {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
-/* Sidebar Column Component */
+
 .sidebar {
     width: 300px;
     background-color: var(--bg-secondary);
@@ -65,7 +59,6 @@ body {
     color: var(--accent-blue); 
 }
 
-/* Workspace Panels Main Display Viewport */
 .main-content {
     flex: 1;
     padding: 2.5rem;
@@ -80,12 +73,9 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    margin: -2.5rem; /* cancel out main-content padding for edge-to-edge */
+    margin: -2.5rem; 
 }
 
-/* ==========================================================================
-   3. SIDEBAR NAVIGATION & TIMER PLUGINS
-   ========================================================================== */
 .wellness-panel {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-color);
@@ -118,7 +108,7 @@ font-size: 0.85rem;
     font-weight: 500;
 }
 
-/* Interactive Navigation System */
+
 .nav-menu { 
     display: flex; 
     flex-direction: column; 
@@ -152,9 +142,6 @@ font-size: 0.85rem;
     box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.2);
 }
 
-/* ==========================================================================
-   4. AUDIO ENGINE FLOW GATES (VIBE PANEL)
-   ========================================================================== */
 .upload-section {
     display: flex;
     justify-content: center;
@@ -257,9 +244,6 @@ font-size: 0.85rem;
     box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
 }
 
-/* ==========================================================================
-   5. WORKSPACE PANELS & LIVE DIFY VIEWPORTS
-   ========================================================================== */
 .study-panel h2 { 
     font-size: 1.6rem; 
     font-weight: 700;
@@ -284,7 +268,6 @@ font-size: 0.85rem;
     border-color: var(--accent-blue);
 }
 
-/* Responsive Live Dify iFrame Frame Layouts */
 .iframe-container {
     width: 100%;
     height: calc(100vh - 180px);
@@ -295,7 +278,6 @@ font-size: 0.85rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Quiz iframe section: edge-to-edge, full remaining height */
 #flashcard-sec {
     display: flex;
     flex-direction: column;
@@ -318,9 +300,6 @@ font-size: 0.85rem;
     overflow: hidden;
 }
 
-/* ==========================================================================
-   6. ACTIVE RECALL GENERIC FLASHCARDS (3D RENDERING MATRIX)
-   ========================================================================== */
 .flashcard-container {
     display: flex;
     justify-content: center;
@@ -345,7 +324,6 @@ font-size: 0.85rem;
     transform-style: preserve-3d;
 }
 
-/* CSS 3D Y-Axis Mirror Rotation Triggered via JS class injection */
 .flashcard.flipped .flashcard-inner {
     transform: rotateY(180deg);
 }
@@ -398,9 +376,6 @@ font-size: 0.85rem;
     transform: translateY(-1px);
 }
 
-/* ==========================================================================
-   7. INTERACTIVE MOCK QUIZ ENGINE MODULES
-   ========================================================================== */
 .content-box {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -427,28 +402,26 @@ font-size: 0.85rem;
     transform: translateX(4px);
 }
 
-/* Brainy Chat Drawer Layout */
 .brainy-chat-drawer {
     position: fixed;
     top: 0;
-    right: -420px; /* Hidden off-screen by default */
+    right: -420px; 
     width: 400px;
     height: 100vh;
     background: #0f0c1b;
     border-left: 2px solid #ff007f;
     box-shadow: -10px 0 30px rgba(255, 0, 127, 0.15);
-    z-index: 10000; /* Stays on top of everything */
+    z-index: 10000; 
     transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
 }
 
-/* When active, slide it into view */
+
 .brainy-chat-drawer.open {
     right: 0;
 }
 
-/* Drawer Header */
 .brainy-drawer-header {
     padding: 1.2rem;
     background: #16122c;
@@ -461,7 +434,7 @@ font-size: 0.85rem;
 .brainy-drawer-header h3 {
     margin: 0;
     font-size: 1.1rem;
-    color: #00f0ff; /* Neon Blue Title */
+    color: #00f0ff; 
     text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
 }
 
@@ -478,7 +451,6 @@ font-size: 0.85rem;
     transform: scale(1.2);
 }
 
-/* Drawer Body for Iframe */
 .brainy-drawer-body {
     flex: 1;
     width: 100%;
@@ -486,16 +458,10 @@ font-size: 0.85rem;
     background: #0f0c1b;
 }
 
-/* Core Panel Toggle Rules*/
 .hidden { 
     display: none !important; 
 }
 
-/* ==========================================================================
-   BRAINY FLOATING COMPANION & DRAW STYLES
-   ========================================================================== */
-
-/* The interactive floating chat trigger bubble */
 .brainy-floating {
     position: fixed;
     bottom: 25px;
@@ -516,14 +482,12 @@ font-size: 0.85rem;
     animation: brainyFloatPulse 3s ease-in-out infinite;
 }
 
-/* Hover dynamic scaling pop */
 .brainy-floating:hover {
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
     border-color: #ff007f;
 }
 
-/* Hover quick helper text */
 .brainy-tooltip {
     position: absolute;
     right: 75px;
@@ -545,11 +509,10 @@ font-size: 0.85rem;
     opacity: 1;
 }
 
-/* Sliding Side Drawer Dashboard Container */
 .brainy-chat-drawer {
     position: fixed;
     top: 0;
-    right: -420px; /* Hidden offscreen on initial load */
+    right: -420px; 
     width: 400px;
     height: 100vh;
     background: #0f0c1b;
@@ -561,12 +524,10 @@ font-size: 0.85rem;
     flex-direction: column;
 }
 
-/* Action class to pull drawer inside viewport area */
 .brainy-chat-drawer.open {
     right: 0;
 }
 
-/* Head configuration inside the widget drawer layout */
 .brainy-drawer-header {
     background: #110d24;
     padding: 15px 20px;
@@ -596,14 +557,12 @@ font-size: 0.85rem;
     color: #ff007f;
 }
 
-/* Core dynamic iframe execution space */
 .brainy-drawer-body {
     flex: 1;
     background: #16122c;
     overflow: hidden;
 }
 
-/* Custom breathing movement definition keyframes */
 @keyframes brainyFloatPulse {
     0% {
         transform: translateY(0px);
@@ -623,12 +582,9 @@ font-size: 0.85rem;
     display: none !important;
 }
 
-/* ==========================================================================
-   8. RESPONSIVE DESIGN 
-   ========================================================================== */
 @media (max-width: 900px) {
     .study-layout {
-        flex-direction: column; /* Stacks vertically on smaller screens*/
+        flex-direction: column; 
 
     }
 }
