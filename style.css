@@ -1,0 +1,675 @@
+/* ==========================================================================
+   1. GLOBAL RESET & CORE COLOR VARIABLES
+   ========================================================================== */
+:root {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --accent-blue: #38bdf8;
+    --accent-green: #4ade80;
+    --accent-amber: #fbbf24;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --radius: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Helper Utility to Manage Hidden Layout States */
+.hidden { 
+    display: none !important; 
+}
+
+/* ==========================================================================
+   2. MAIN APPLICATION SHELL LAYOUT
+   ========================================================================== */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Sidebar Column Component */
+.sidebar {
+    width: 300px;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    gap: 2.5rem;
+    flex-shrink: 0;
+}
+
+.logo h2 { 
+    font-size: 1.6rem; 
+    font-weight: 700; 
+    letter-spacing: 0.5px;
+}
+
+.logo span { 
+    color: var(--accent-blue); 
+}
+
+/* Workspace Panels Main Display Viewport */
+.main-content {
+    flex: 1;
+    padding: 2.5rem;
+    overflow-y: auto;
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-panels {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: -2.5rem; /* cancel out main-content padding for edge-to-edge */
+}
+
+/* ==========================================================================
+   3. SIDEBAR NAVIGATION & TIMER PLUGINS
+   ========================================================================== */
+.wellness-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.wellness-panel h3 {
+font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+#session-timer {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--accent-amber);
+    margin-bottom: 0.4rem;
+    font-family: monospace;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.1);
+}
+
+#hydration-status { 
+    font-size: 0.85rem; 
+    color: var(--accent-blue); 
+    font-weight: 500;
+}
+
+/* Interactive Navigation System */
+.nav-menu { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 1rem;
+    text-align: left;
+    font-size: 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--text-main);
+}
+
+.nav-btn.active {
+    background-color: rgba(56, 189, 248, 0.08);
+    color: var(--accent-blue);
+    box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+/* ==========================================================================
+   4. AUDIO ENGINE FLOW GATES (VIBE PANEL)
+   ========================================================================== */
+.upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.dropzone {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 3rem;
+    border-radius: calc(var(--radius) * 1.5);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.dropzone h3 { 
+    margin-bottom: 0.75rem; 
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.dropzone p { 
+    color: var(--text-muted); 
+    margin-bottom: 2rem; 
+    font-size: 0.95rem; 
+    line-height: 1.5;
+}
+
+.mode-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.mode-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 1rem;
+    border-radius: var(--radius);
+    text-align: left;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.mode-btn:hover {
+    border-color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.mode-btn.active-vibe {
+    border-color: var(--accent-green);
+    background: rgba(74, 222, 128, 0.05);
+    color: var(--accent-green);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+}
+
+.audio-player-placeholder {
+    background: var(--bg-primary);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.audio-player-placeholder p {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.audio-player-placeholder audio { 
+    width: 100%; 
+    margin-top: 0.5rem; 
+    outline: none;
+}
+
+#launch-workspace-btn {
+    background-color: var(--accent-blue);
+    color: #0f172a;
+    border: none;
+    padding: 1.1rem;
+    border-radius: var(--radius);
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+}
+
+#launch-workspace-btn:hover { 
+    opacity: 0.95; 
+    transform: translateY(-1px); 
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+}
+
+/* ==========================================================================
+   5. WORKSPACE PANELS & LIVE DIFY VIEWPORTS
+   ========================================================================== */
+.study-panel h2 { 
+    font-size: 1.6rem; 
+    font-weight: 700;
+    margin-bottom: 0.25rem; 
+}
+
+.custom-select {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    outline: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.custom-select:focus {
+    border-color: var(--accent-blue);
+}
+
+/* Responsive Live Dify iFrame Frame Layouts */
+.iframe-container {
+    width: 100%;
+    height: calc(100vh - 180px);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Quiz iframe section: edge-to-edge, full remaining height */
+#flashcard-sec {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+}
+
+#flashcard-sec h2 {
+    padding: 1.2rem 1.5rem 0.8rem 1.5rem;
+    flex-shrink: 0;
+}
+
+#flashcard-sec .iframe-container {
+    flex: 1;
+    height: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   6. ACTIVE RECALL GENERIC FLASHCARDS (3D RENDERING MATRIX)
+   ========================================================================== */
+.flashcard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+    margin-top: 1rem;
+}
+
+.flashcard {
+    width: 480px;
+    height: 280px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* CSS 3D Y-Axis Mirror Rotation Triggered via JS class injection */
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.flashcard-front {
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--accent-blue);
+    color: var(--text-main);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.flashcard-back {
+    background-color: #1e3a8a;
+    border: 2px solid var(--accent-blue);
+    color: #ffffff;
+    transform: rotateY(180deg);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.control-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.control-btn:hover {
+    background-color: rgba(56, 189, 248, 0.1);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   7. INTERACTIVE MOCK QUIZ ENGINE MODULES
+   ========================================================================== */
+.content-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.quiz-option-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 1.1rem 1.25rem;
+    margin: 0.85rem 0;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.quiz-option-item:hover {
+    background: rgba(56, 189, 248, 0.04);
+    border-color: var(--accent-blue);
+    transform: translateX(4px);
+}
+
+/* Brainy Chat Drawer Layout */
+.brainy-chat-drawer {
+    position: fixed;
+    top: 0;
+    right: -420px; /* Hidden off-screen by default */
+    width: 400px;
+    height: 100vh;
+    background: #0f0c1b;
+    border-left: 2px solid #ff007f;
+    box-shadow: -10px 0 30px rgba(255, 0, 127, 0.15);
+    z-index: 10000; /* Stays on top of everything */
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* When active, slide it into view */
+.brainy-chat-drawer.open {
+    right: 0;
+}
+
+/* Drawer Header */
+.brainy-drawer-header {
+    padding: 1.2rem;
+    background: #16122c;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brainy-drawer-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #00f0ff; /* Neon Blue Title */
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.close-drawer-btn {
+    background: transparent;
+    border: none;
+    color: #ff007f;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.close-drawer-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Drawer Body for Iframe */
+.brainy-drawer-body {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    background: #0f0c1b;
+}
+
+/* Core Panel Toggle Rules*/
+.hidden { 
+    display: none !important; 
+}
+
+/* ==========================================================================
+   BRAINY FLOATING COMPANION & DRAW STYLES
+   ========================================================================== */
+
+/* The interactive floating chat trigger bubble */
+.brainy-floating {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #110d24;
+    border: 2px solid #00f0ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: brainyFloatPulse 3s ease-in-out infinite;
+}
+
+/* Hover dynamic scaling pop */
+.brainy-floating:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
+    border-color: #ff007f;
+}
+
+/* Hover quick helper text */
+.brainy-tooltip {
+    position: absolute;
+    right: 75px;
+    background: #16122c;
+    color: #00f0ff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ff007f;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
+}
+
+.brainy-floating:hover .brainy-tooltip {
+    opacity: 1;
+}
+
+/* Sliding Side Drawer Dashboard Container */
+.brainy-chat-drawer {
+    position: fixed;
+    top: 0;
+    right: -420px; /* Hidden offscreen on initial load */
+    width: 400px;
+    height: 100vh;
+    background: #0f0c1b;
+    border-left: 2px solid #ff007f;
+    box-shadow: -10px 0 30px rgba(15, 12, 27, 0.8);
+    z-index: 2500;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Action class to pull drawer inside viewport area */
+.brainy-chat-drawer.open {
+    right: 0;
+}
+
+/* Head configuration inside the widget drawer layout */
+.brainy-drawer-header {
+    background: #110d24;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brainy-drawer-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #00f0ff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.close-drawer-btn {
+    background: transparent;
+    border: none;
+    color: #a09cb0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-drawer-btn:hover {
+    color: #ff007f;
+}
+
+/* Core dynamic iframe execution space */
+.brainy-drawer-body {
+    flex: 1;
+    background: #16122c;
+    overflow: hidden;
+}
+
+/* Custom breathing movement definition keyframes */
+@keyframes brainyFloatPulse {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+    50% {
+        transform: translateY(-8px);
+        box-shadow: 0 0 22px rgba(0, 240, 255, 0.7);
+    }
+    100% {
+        transform: translateY(0px);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+}
+
+.hidden{
+    display: none !important;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE DESIGN 
+   ========================================================================== */
+@media (max-width: 900px) {
+    .study-layout {
+        flex-direction: column; /* Stacks vertically on smaller screens*/
+
+    }
+}
+
+.welcome-overlay {
+    position: fixed;
+    inset: 0;
+    background: #020818;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
+#stars-canvas { position: absolute; inset: 0; }
+
+.cosmos-logo { 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    z-index: 2; pointer-events: none; 
+}
+
+.cosmos-title { font-size: 3rem; font-weight: bold; color: #fff; letter-spacing: 8px; text-shadow: 0 0 20px rgba(100,180,255,0.8); animation: floatY 3s ease-in-out infinite; }
+.cosmos-sub { font-size: 1rem; color: rgba(100,200,255,0.7); letter-spacing: 12px; margin-top: 10px; }
+
+.orbit-ring { position: absolute; width: 250px; height: 250px; border: 1px solid rgba(100,180,255,0.3); border-radius: 50%; animation: spin 8s linear infinite; }
+.orbit-dot { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #7eb8ff; border-radius: 50%; box-shadow: 0 0 15px #7eb8ff; }
+
+.choose-btn { 
+    margin-top: 40px; padding: 15px 40px; background: transparent; color: #fff; 
+    border: 1px solid #7eb8ff; border-radius: 8px; cursor: pointer; pointer-events: auto;
+    transition: 0.3s;
+}
+.choose-btn:hover { background: #7eb8ff; color: #020818; }
+
+@keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#quiz-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
