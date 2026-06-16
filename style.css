@@ -625,7 +625,6 @@ font-size: 0.85rem;
     display: block;
 }
 
-/* ── Quiz section: edge-to-edge, full height ── */
 #flashcard-sec {
     display: flex;
     flex-direction: column;
@@ -675,16 +674,12 @@ font-size: 0.85rem;
     display: none;
 }
 
-/* ════════════════════════════════════════
-   MOBILE & TABLET  (≤ 768px)
-════════════════════════════════════════ */
 @media (max-width: 768px) {
 
     body {
         overflow: hidden;
     }
 
-    /* Hamburger button — always visible on mobile */
     .hamburger-btn {
         display: flex;
         align-items: center;
@@ -704,7 +699,7 @@ font-size: 0.85rem;
         box-shadow: 0 0 10px rgba(0,240,255,0.3);
     }
 
-    /* Dark overlay behind sidebar */
+    
     .sidebar-overlay {
         display: block;
         position: fixed;
@@ -721,7 +716,6 @@ font-size: 0.85rem;
         pointer-events: all;
     }
 
-    /* Sidebar slides in from left */
     .sidebar {
         position: fixed;
         top: 0;
@@ -739,7 +733,6 @@ font-size: 0.85rem;
         left: 0;
     }
 
-    /* Main content takes full width */
     .app-container {
         flex-direction: column;
     }
@@ -755,7 +748,6 @@ font-size: 0.85rem;
         margin-top: 0;
     }
 
-    /* Vibe gate: stack music buttons vertically on small screens */
     .vibe-selector-row {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -765,7 +757,6 @@ font-size: 0.85rem;
         padding: 1.5rem;
     }
 
-    /* Brainy widget: move left slightly so it doesn't clash */
     .brainy-floating {
         bottom: 15px;
         right: 15px;
@@ -774,7 +765,6 @@ font-size: 0.85rem;
         font-size: 1.4rem;
     }
 
-    /* Brainy drawer: full width on mobile */
     .brainy-chat-drawer {
         width: 100%;
         right: -100%;
