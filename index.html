@@ -111,7 +111,7 @@
             document.getElementById('sidebar').classList.remove('open');
             document.getElementById('sidebar-overlay').classList.remove('open');
         }
-        
+        // Auto-close sidebar when a nav button is clicked on mobile
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 if (window.innerWidth <= 768) closeSidebar();
