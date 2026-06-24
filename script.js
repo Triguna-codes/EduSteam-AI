@@ -1,14 +1,22 @@
+/**
+ * EDUSTEAM AI - Core Application Script
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
-    
+    // 1. Initialize the new Welcome Screen & Star Animation
     initWelcomeScreen();
     initStarCanvas();
 
-    
+    // 2. Initialize your existing app features
     initAudioEngine();
     initWorkspaceLauncher();
     initTabEngine();
     initFocusTimer();
 });
+
+/* ==========================================================================
+   NEW: Welcome Screen & Animation Logic
+   ========================================================================== */
 
 function initWelcomeScreen() {
     const btn = document.getElementById("enter-app-btn");
@@ -56,6 +64,9 @@ function initStarCanvas() {
     draw();
 }
 
+/* ==========================================================================
+   EXISTING: Your App Functionality
+   ========================================================================== */
 
 function initAudioEngine() {
     const modeButtons = document.querySelectorAll(".mode-btn");
